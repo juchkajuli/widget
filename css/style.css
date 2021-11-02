@@ -8,31 +8,18 @@ body {
   background: #E9E9E9;
 }
 
-.tabs {
-  min-width: 360px;
+.container {
+  min-width: 280px;
   max-width: 960px;
   box-sizing: border-box;
-}
-
-.tabs .section {
-  display: none;
-  border: 2px solid #686767;
-  background: #fff;
-  height: 350px;
-  padding: 1rem 2rem;
-}
-
-img {
-  width: 100px;
-  height: 100px;
 }
 
 .tabs input {
   display: none;
   position: absolute;
-  }
+}
   
-  .tabs label {
+.tabs label {
   display: inline-block;
   margin: 0 0 -1px 5px;
   padding: .7rem 1rem;
@@ -42,62 +29,74 @@ img {
   border-bottom: 1px solid #686767;
   background: #E0DEDE;
   border-radius: 3px 3px 0 0;
-  }
+}
 
   
-  .tabs input:checked+label,
-  .tabs label:hover {
+.tabs .active+label,
+.tabs label:hover {
   color: #555;
   border: 2px solid #686767;
   border-bottom: 1px solid #686767;
   background: #fff;
   cursor: pointer;
   transition: background .5s;
-  }
+}
   
-  #tab1:checked~#content-tab1, 
-  #tab2:checked~#content-tab2, 
-  #tab3:checked~#content-tab3, 
-  #tab4:checked~#content-tab4, 
-  #tab5:checked~#content-tab5 {
+.section {
+  display: none;
+  border: 2px solid #686767;
+  background: #fff;
+  height: 350px;
+  padding: 1rem 2rem;
+}
+
+.section.active {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-image {
+  max-width: 150px;
+  max-height: 150px;
+  display: block;
+  margin-top: 1rem;
+}
+
+
+@media screen and (min-width: 280px) and (max-width: 920px) {
+  body {
+    margin: 0 auto;
+  }
+
+  .container {
+    margin: .5rem 1rem;
+  }
+
+  .tabs,
+  .section.active {
     display: flex;
-    justify-content: space-between;
-  }
-  
-
-  
-  @media screen and (min-width: 280px) and (max-width: 760px) {
-    body {
-      margin: 0 auto;
-    }
-
-    .tabs,
-    #tab1:checked~#content-tab1, 
-    #tab2:checked~#content-tab2, 
-    #tab3:checked~#content-tab3, 
-    #tab4:checked~#content-tab4, 
-    #tab5:checked~#content-tab5 {
-      display: flex;
-      flex-direction: column;
+    flex-direction: column;
       
-    }
-
-    #tab1:checked~#content-tab1, 
-    #tab2:checked~#content-tab2, 
-    #tab3:checked~#content-tab3, 
-    #tab4:checked~#content-tab4, 
-    #tab5:checked~#content-tab5 {
-      align-items: center;
-    }
-
-    .tabs .section {
-      height: max-content;
-      margin-bottom: 1rem;
-    }
-
-    .tabs label {
-      margin: 0;
-      padding: 1rem 2rem;
-    }
   }
+
+  .section.active {
+    align-items: center;
+  }
+
+  .section {
+    height: max-content;
+    margin-bottom: 1rem;
+  }
+
+  .tabs label {
+    margin: 0;
+    padding: 1rem 2rem;
+  }
+}
 
