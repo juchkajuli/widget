@@ -34,30 +34,68 @@ var categories = [
   {categoryId:5, categoryName: 'Брюки'},
 ];
 
+const tabs = document.querySelector('.tabs')
+const imgSrc = "http://rrstatic.retailrocket.net/test_task/tovar.jpg"
 
-const label = document.querySelectorAll('.tabs label')
-const content = document.querySelectorAll('.tabs .section')
-const images = document.querySelectorAll('.tabs .images')
-const i = "http://rrstatic.retailrocket.net/test_task/tovar.jpg"
+categories.forEach(category => {
+  const tabsLabel =  `
+    <input id="tab${category.categoryId}" 
+      type="radio" 
+      name="tabs"
+      class="tab"
+    /> 
+    <label for="tab${category.categoryId}"
+      title="Вкладка ${category.categoryId}">
+      ${category.categoryName}
+    </label>
+  `
+  tabs.insertAdjacentHTML('beforeend', tabsLabel)
 
+  let sectionProduct = document.createElement('div')
+  sectionProduct.setAttribute('id', 'content-tab' + category.categoryId)
+  sectionProduct.className = "section"
+  document.body.firstElementChild.append(sectionProduct)
 
-for (category in categories) {
-  label[+category].innerHTML = categories[+category].categoryName
-
-  for (product in products) {
-    if (categories[+category].categoryId == products[+product].categoryId) {
-       content[+category].innerHTML += ' ' 
-        + "<div>" 
-        + "<p class=\""+'name-product'+"\">" 
-        + products[+product].productName + "</p>"
-        +"<img src=\""+i+"\" class=\""+'image-product'+"\" />"
-        + "</div>"
+  products.forEach(product => {
+    if (category.categoryId == product.categoryId) {
+      sectionProduct.innerHTML += `
+          <p class="product-info">
+            ${product.productName}
+            <img src=${imgSrc} class="product-image" />
+          </p>
+       `
     }
-  }
+  })
+})
+
+function addActiveClass() {
+  const tabLabel = document.getElementById("tab1")
+  const tabContent = document.getElementById("content-tab1")
+  tabContent.className = "active" + " " + "section" 
+  tabLabel.className = "active" + " " +"tab"
 }
 
 
+let tab = document.querySelectorAll('.tab')
+let tabClicked = tab[0]
 
+let section = document.querySelectorAll('.section')
+let sectionClick = section[0]
 
+for (let i = 0; i < tab.length; i++ ){
+  tab[i].addEventListener('click', function() {
+    tabClicked.classList.remove('active')
+    tabClicked = tab[i]
+    tabClicked.classList.add('active')
 
+    for (let j = 0; j < section.length; j++) {
+      if (i == j) {
+        sectionClick.classList.remove('active')
+        sectionClick = section[j]
+        sectionClick.classList.add('active')
+      }
+    }
+  });
+}
 
+addActiveClass()
